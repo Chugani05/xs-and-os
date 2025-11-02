@@ -112,4 +112,26 @@ export const Styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
   },
+
+
+
+  scoreContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '80%',
+    marginBottom: 10,
+  },
+  scoreText: {
+    color: '#c9d1d9',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  resetStatsButton: {
+    backgroundColor: '#444',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
+  }
+
 });

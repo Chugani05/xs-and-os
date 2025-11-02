@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Square from './Square';
-import { calculateWinner } from '../utils/calculateWinner';
 import { Styles } from '../styles/GlobalStyles';
+import { calculateWinner } from '../utils/calculateWinner';
 
 type Props = {
   xIsNext: boolean, 

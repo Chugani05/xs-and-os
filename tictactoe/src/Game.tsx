@@ -4,11 +4,14 @@ import Board from './components/Board';
 import { Styles } from './styles/GlobalStyles';
 import ResetButton from './components/ResetButton';
 import HistoryButton from './components/HistoryButton';
+import Scoreboard from './components/ScoreBoard';
 
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [scoreX, setScoreX] = useState(0);
+  const [scoreO, setScoreO] = useState(0);
 
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
@@ -30,14 +33,22 @@ export default function Game() {
     setIsDropdownOpen(false);
   }
 
+  function resetStats() {
+    setScoreX(0);
+    setScoreO(0);
+  }
+
   const moves = history.map((squares, move) => ({
     key: move.toString(),
     label: move ? `Go to move #${move}` : 'Go to start',
-  }));
+  }
+));
+  
 
   return (
     <View style={Styles.gameContainer}>
       <View style={Styles.boardSection}>
+        <Scoreboard scoreX={scoreX} scoreO={scoreO} onResetStats={resetStats} />
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         
         <View style={Styles.controlsContainer}>
