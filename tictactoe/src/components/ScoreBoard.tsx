@@ -11,11 +11,13 @@ type Props = {
 export default function Scoreboard({ scoreX, scoreO, onResetStats }: Props) {
   return (
     <View style={Styles.scoreContainer}>
-      <Text style={Styles.scoreText}>X Wins: {scoreX}</Text>
-      <Text style={Styles.scoreText}>O Wins: {scoreO}</Text>
-      <TouchableOpacity style={Styles.resetStatsButton} onPress={onResetStats}>
-        <Text style={Styles.buttonText}>Reset Stats</Text>
-      </TouchableOpacity>
+        <View>
+            <Text style={Styles.scoreText}>X Wins: {scoreX}</Text>
+            <Text style={Styles.scoreText}>O Wins: {scoreO}</Text>
+        </View>
+        <TouchableOpacity style={Styles.button} onPress={onResetStats}>
+            <Text style={Styles.buttonText}>Reset Stats</Text>
+        </TouchableOpacity>
     </View>
   );
 }

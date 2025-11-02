@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native';
 import Board from './components/Board';
 import { Styles } from './styles/GlobalStyles';
 import ResetButton from './components/ResetButton';
 import HistoryButton from './components/HistoryButton';
 import Scoreboard from './components/ScoreBoard';
 import { calculateWinner } from './utils/calculateWinner';
+import BoardSizeSelector from './components/BoardSizeSelector';
 
 export default function Game() {
   const [size, setSize] = useState(3);
@@ -49,6 +50,12 @@ export default function Game() {
     setScoreO(0);
   }
 
+  function handleApplySize(newSize: number) {
+    setSize(newSize);
+    setHistory([Array(newSize * newSize).fill(null)]);
+    setCurrentMove(0);
+  }
+
   const moves = history.map((squares, move) => ({
     key: move.toString(),
     label: move ? `Go to move #${move}` : 'Go to start',
@@ -58,6 +65,9 @@ export default function Game() {
 
   return (
     <View style={Styles.gameContainer}>
+
+      <BoardSizeSelector onApplySize={handleApplySize} />
+
       <View style={Styles.boardSection}>
         <Scoreboard scoreX={scoreX} scoreO={scoreO} onResetStats={resetStats} />
         <Board size={size} xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />

@@ -56,8 +56,11 @@ export const Styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
   },
+    squareHighlight: {
+    backgroundColor: '#238636',
+  },
 
-  // buttons
+  // Buttons
   controlsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -83,7 +86,7 @@ export const Styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  // dropdown
+  // Dropdown
   dropdownWrapper: {
     position: 'relative',
   },
@@ -113,10 +116,7 @@ export const Styles = StyleSheet.create({
     fontSize: 14,
   },
 
-
-  squareHighlight: {
-    backgroundColor: '#238636',
-  },
+  // Stats 
   input: {
     backgroundColor: '#21262d',
     color: '#fff',
@@ -138,12 +138,5 @@ export const Styles = StyleSheet.create({
     color: '#c9d1d9',
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  resetStatsButton: {
-    backgroundColor: '#444',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 8,
   }
-
 });
