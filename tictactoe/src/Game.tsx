@@ -5,9 +5,11 @@ import { Styles } from './styles/GlobalStyles';
 import ResetButton from './components/ResetButton';
 import HistoryButton from './components/HistoryButton';
 import Scoreboard from './components/ScoreBoard';
+import { calculateWinner } from './utils/calculateWinner';
 
 export default function Game() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [size, setSize] = useState(3);
+  const [history, setHistory] = useState([Array(size * size).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scoreX, setScoreX] = useState(0);
@@ -16,10 +18,16 @@ export default function Game() {
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
-  function handlePlay(nextSquares: Array<String>) {
+  function handlePlay(nextSquares: (string | null)[]) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
+
+    const result = calculateWinner(nextSquares, size);
+    if (result?.winner) {
+      if (result.winner === 'X') setScoreX(scoreX + 1);
+      else setScoreO(scoreO + 1);
+    }
   }
 
   function jumpTo(move: number) {
@@ -27,10 +35,13 @@ export default function Game() {
     setIsDropdownOpen(false);
   }
 
-  function restartGame() {
-    setHistory([Array(9).fill(null)]);
+  function restartGame(forceWin?: 'X' | 'O') {
+    if (forceWin) {
+      if (forceWin === 'X') setScoreX(scoreX + 1);
+      else setScoreO(scoreO + 1);
+    }
+    setHistory([Array(size * size).fill(null)]);
     setCurrentMove(0);
-    setIsDropdownOpen(false);
   }
 
   function resetStats() {
@@ -49,7 +60,7 @@ export default function Game() {
     <View style={Styles.gameContainer}>
       <View style={Styles.boardSection}>
         <Scoreboard scoreX={scoreX} scoreO={scoreO} onResetStats={resetStats} />
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <Board size={size} xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         
         <View style={Styles.controlsContainer}>
           <ResetButton title='Restart Game' onPress={restartGame}></ResetButton>

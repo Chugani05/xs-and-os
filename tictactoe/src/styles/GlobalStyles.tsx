@@ -114,7 +114,19 @@ export const Styles = StyleSheet.create({
   },
 
 
-
+  squareHighlight: {
+    backgroundColor: '#238636',
+  },
+  input: {
+    backgroundColor: '#21262d',
+    color: '#fff',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    width: 100,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
   scoreContainer: {
     flexDirection: 'row',
     alignItems: 'center',

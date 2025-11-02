@@ -1,20 +1,28 @@
-export function calculateWinner(squares: Array<string>) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
+export function calculateWinner(squares: (string | null)[], size: number) {
+  const lines: number[][] = [];
 
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+  for (let r = 0; r < size; r++) {
+    const row = [];
+    for (let c = 0; c < size; c++) row.push(r * size + c);
+    lines.push(row);
+  }
+
+  for (let c = 0; c < size; c++) {
+    const col = [];
+    for (let r = 0; r < size; r++) col.push(r * size + c);
+    lines.push(col);
+  }
+
+  lines.push([...Array(size)].map((_, i) => i * size + i));
+
+  lines.push([...Array(size)].map((_, i) => i * size + (size - 1 - i)));
+
+  for (const line of lines) {
+    const [first, ...rest] = line;
+    if (squares[first] && rest.every(i => squares[i] === squares[first])) {
+      return { winner: squares[first], line };
     }
   }
+
   return null;
 }
