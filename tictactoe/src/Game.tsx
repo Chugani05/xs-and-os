@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import Board from './components/Board';
 import { Styles } from './styles/GlobalStyles';
-import ResetButton from './components/ResetButton';
-import HistoryButton from './components/HistoryButton';
 import Scoreboard from './components/ScoreBoard';
 import { calculateWinner } from './utils/calculateWinner';
 import BoardSizeSelector from './components/BoardSizeSelector';
+import Button from './components/Button';
 
 export default function Game() {
   const [size, setSize] = useState(3);
@@ -73,10 +72,10 @@ export default function Game() {
         <Board size={size} xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         
         <View style={Styles.controlsContainer}>
-          <ResetButton title='Restart Game' onPress={restartGame}></ResetButton>
+          <Button title='Restart Game' onPress={restartGame}></Button>
           
           <View style={Styles.dropdownWrapper}>
-            <HistoryButton title='Moves ▴' onPress={() => setIsDropdownOpen(!isDropdownOpen)}></HistoryButton>
+            <Button title='Moves ▴' onPress={() => setIsDropdownOpen(!isDropdownOpen)}></Button>
               {isDropdownOpen && (
                 <View style={Styles.dropdownList}>
                   <FlatList
