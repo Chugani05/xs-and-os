@@ -36,10 +36,11 @@ export default function Game() {
   }
 
   function restartGame(forceWin?: 'X' | 'O') {
-    if (forceWin) {
-      if (forceWin === 'X') setScoreX(scoreX + 1);
-      else setScoreO(scoreO + 1);
-    }
+    // if (forceWin) {
+    //   console.log(forceWin)
+    //   if (forceWin === 'X') setScoreX(scoreX + 1);
+    //   else setScoreO(scoreO + 1);
+    // }
     setHistory([Array(size * size).fill(null)]);
     setCurrentMove(0);
   }
@@ -72,7 +73,7 @@ export default function Game() {
         <Board size={size} xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         
         <View style={Styles.controlsContainer}>
-          <Button title='Restart Game' onPress={restartGame}></Button>
+          <Button title='Restart Game' onPress={() => restartGame()}></Button>
           
           <View style={Styles.dropdownWrapper}>
             <Button title='Moves ▴' onPress={() => setIsDropdownOpen(!isDropdownOpen)}></Button>
