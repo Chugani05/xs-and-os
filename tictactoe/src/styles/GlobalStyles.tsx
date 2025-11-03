@@ -20,6 +20,8 @@ export const Styles = StyleSheet.create({
   // Board styles
   boardContainer: {
     alignItems: 'center',
+    justifyContent: "center",
+    marginTop: 20,
   },
   boardRow: {
     flexDirection: 'row',

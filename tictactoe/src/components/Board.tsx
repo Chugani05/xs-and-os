@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import Square from './Square';
-import { calculateWinner } from '../utils/calculateWinner';
-import { Styles } from '../styles/GlobalStyles';
+import React from "react";
+import { View, Text } from "react-native";
+import Square from "./Square";
+import { calculateWinner } from "../utils/calculateWinner";
+import { Styles } from "../styles/GlobalStyles";
 
 type Props = {
   size: number;
@@ -20,15 +20,18 @@ export default function Board({ size, xIsNext, squares, onPlay }: Props) {
     if (winner || squares[i]) return;
 
     const nextSquares = squares.slice();
-    nextSquares[i] = xIsNext ? 'X' : 'O';
+    nextSquares[i] = xIsNext ? "X" : "O";
     onPlay(nextSquares);
   }
 
   const status = winner
     ? `Winner: ${winner}`
     : squares.every(Boolean)
-    ? 'Tie'
-    : `Next player: ${xIsNext ? 'X' : 'O'}`;
+    ? "Tie"
+    : `Next player: ${xIsNext ? "X" : "O"}`;
+
+  const baseSquareSize = 90;
+  const squareSize = baseSquareSize - (size - 3) * 10;
 
   return (
     <View style={Styles.boardContainer}>
@@ -43,6 +46,7 @@ export default function Board({ size, xIsNext, squares, onPlay }: Props) {
                 value={squares[index]}
                 onSquareClick={() => handleClick(index)}
                 highlight={winningLine.includes(index)}
+                size={squareSize}
               />
             );
           })}
